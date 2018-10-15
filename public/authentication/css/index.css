@@ -1,9 +1,8 @@
 .login {
   width: 100%;
-  height: 100%;
+  height: 105%;
   background: #000000;
-  background: -webkit-linear-gradient(to bottom, #43CE2D, #000000);
-  background: linear-gradient(to bottom, #43CE2D, #000000); }
+  background: linear-gradient(to bottom, rgba(67, 206, 45, 0.9), #1a5411); }
 
 table {
   width: 100%; }
@@ -14,7 +13,7 @@ td {
 .Usuario {
   text-align: left !important; }
 
-.Usuario .us p {
+.us {
   margin-top: 10% !important;
   color: white !important; }
 
@@ -147,6 +146,13 @@ u {
 
 .left {
   text-align: left !important; }
+
+.submit {
+  border: none;
+  border-color: white;
+  color: #737474;
+  border-radius: 2px;
+  background-color: white !important; }
 
 @media screen and (max-width: 992px) {
   p {
