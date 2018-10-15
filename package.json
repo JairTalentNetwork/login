@@ -1,0 +1,22 @@
+{
+  "name": "talent_republic",
+  "version": "1.0.0",
+  "description": "Talent Network App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Talent Network Web Team",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.2",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "joi": "^13.7.0",
+    "jsonwebtoken": "^8.3.0",
+    "pg-promise": "^8.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
