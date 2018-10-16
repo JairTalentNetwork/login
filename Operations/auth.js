@@ -1,6 +1,29 @@
 const JWT = require('jsonwebtoken');
 const db = require('../Database/postgres');
 
+function get_username(req, res, next)
+{
+  const { username } = req.body.validated;
+  db.any('SELECT * FROM ' +
+         'user_profile WHERE username=$1', 
+         username)
+
+    .then(function (data) 
+    {
+      if (data.length > 0){
+        res.status(200).end('Welcome to Republic!');
+        }
+      else{
+        throw new Error('Unregistered user')
+      }
+    })
+
+    .catch(function (err) {
+      res.status(400).end('Unregistered user')
+      return next(err);
+    });
+};
+
 module.exports = 
 {
 
@@ -10,9 +33,8 @@ module.exports =
   {
     try
     {
-      const { email, password } = req.correct.body
+      const { email, password } = req.validated.body
 
-      // Check if there is already that email in the database
       const emailExists = await db.any(
         'select * from user_profile where email = $1', 
         email)
@@ -23,15 +45,11 @@ module.exports =
            message: 'Email already in use' });
       }
 
-      // Create new user in the database
-      const user = {email, password}
-
       db.none('insert into user_profile(email, password)' +
               'values(${email}, ${password})',
-               req.correct.body);
+              req.validated.body);
 
       // Respond with token instead of json
-       
     } 
     catch(error){next(error);}
   },
@@ -40,15 +58,7 @@ module.exports =
 
   signIn: async (req, res, next) =>
   {
-    try
-    // token => post
-    {
-      console.log('---- signin  ----')
-    } 
-    catch(error)
-    {
-      next(error);
-    }
+   await get_username(req, res, next);
   },
 
 //    .......................................
