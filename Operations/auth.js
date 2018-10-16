@@ -4,7 +4,6 @@ const db = require('../Database/postgres');
 function get_username(req, res, next)
 {
   const { username } = req.body.validated;
-  console.log('Username -------> ', username);
   db.any('SELECT * FROM ' +
          'user_profile WHERE username=$1', 
          username)
