@@ -1,8 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-const require = require('../Operations/auth');
-const { validate, schema } = require('../Validation/auth');
+const operations = 
+  require('../Operations/auth');
+
+const { validate, schema } = 
+  require('../Validation/auth');
+
+// ------------------------------------------------
 
 router.route('/signup')
   .post(
@@ -11,8 +16,8 @@ router.route('/signup')
 
 router.route('/signin')
   .post(
-      validate(schema.signIn_Schema),
-      require('../Operations/signin').signIn);
+    validate(schema.signin_Schema),
+    require('../Operations/signin').signin);
 
 router.route('/access')
   .get(operations.access)

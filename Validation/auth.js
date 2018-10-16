@@ -10,7 +10,7 @@ module.exports =
   validate: (schema) =>
   {
     return (req, res, next) =>
-    {      
+    {     
       const data_processed = Joi.validate(
         req.body, 
         schema);
@@ -27,7 +27,7 @@ module.exports =
       }
 
       req.body.validated = req.body;
-
+      
       next();
     }
   },
@@ -43,7 +43,7 @@ module.exports =
         password: password_schema.required()
       }),
     
-    signIn_Schema: Joi.object().keys(
+    signin_Schema: Joi.object().keys(
       {
         username: Joi.string().min(4).max(30),
         password: password_schema.required(),
