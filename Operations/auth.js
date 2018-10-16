@@ -1,28 +1,4 @@
-const JWT = require('jsonwebtoken');
 const db = require('../Database/postgres');
-
-function get_username(req, res, next)
-{
-  const { username } = req.body.validated;
-  db.any('SELECT * FROM ' +
-         'user_profile WHERE username=$1', 
-         username)
-
-    .then(function (data) 
-    {
-      if (data.length > 0){
-        res.status(200).end('Welcome to Republic!');
-        }
-      else{
-        throw new Error('Unregistered user')
-      }
-    })
-
-    .catch(function (err) {
-      res.status(400).end('Unregistered user')
-      return next(err);
-    });
-};
 
 module.exports = 
 {
@@ -56,13 +32,6 @@ module.exports =
 
 //    .......................................
 
-  signIn: async (req, res, next) =>
-  {
-   await get_username(req, res, next);
-  },
-
-//    .......................................
-
   access: async (req, res, next) =>
   {
     console.log('In access handler')
@@ -74,7 +43,7 @@ module.exports =
           {
             status: 'success',
             data: data,
-            message: 'Retrieved emails'
+            message: 'You are in members area'
           });
       })
 
