@@ -1,4 +1,3 @@
-const JWT = require('jsonwebtoken');
 const db = require('../Database/postgres');
 
 module.exports = 
@@ -10,9 +9,8 @@ module.exports =
   {
     try
     {
-      const { email, password } = req.correct.body
+      const { email, password } = req.validated.body
 
-      // Check if there is already that email in the database
       const emailExists = await db.any(
         'select * from user_profile where email = $1', 
         email)
@@ -23,32 +21,13 @@ module.exports =
            message: 'Email already in use' });
       }
 
-      // Create new user in the database
-      const user = {email, password}
-
       db.none('insert into user_profile(email, password)' +
               'values(${email}, ${password})',
-               req.correct.body);
+              req.validated.body);
 
       // Respond with token instead of json
-       
     } 
     catch(error){next(error);}
-  },
-
-//    .......................................
-
-  signIn: async (req, res, next) =>
-  {
-    try
-    // token => post
-    {
-      console.log('---- signin  ----')
-    } 
-    catch(error)
-    {
-      next(error);
-    }
   },
 
 //    .......................................
@@ -64,7 +43,7 @@ module.exports =
           {
             status: 'success',
             data: data,
-            message: 'Retrieved emails'
+            message: 'You are in members area'
           });
       })
 

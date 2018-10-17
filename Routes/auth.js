@@ -1,18 +1,25 @@
 const express = require("express");
 const router = express.Router();
 
-const handler = require('../Operations/auth');
-const { validate, schema } = require('../Validation/auth');
+const operations = 
+  require('../Operations/auth');
+
+const { validate, schema } = 
+  require('../Validation/auth');
+
+// ------------------------------------------------
 
 router.route('/signup')
   .post(
     validate(schema.authSchema), 
-    handler.signUp)
+    operations.signUp);
 
 router.route('/signin')
-  .post(handler.signIn)
+  .post(
+    validate(schema.signin_Schema),
+    require('../Operations/signin').signin);
 
 router.route('/access')
-  .get(handler.access)
+  .get(operations.access)
 
 module.exports = router;
